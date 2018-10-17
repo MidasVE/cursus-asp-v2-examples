@@ -33,7 +33,7 @@ namespace EntityFrameworkMvc
         options.MinimumSameSitePolicy = SameSiteMode.None;
       });
 
-      services.AddDbContext<PersonContext>(opt => opt.UseInMemoryDatabase("personctx"));
+      services.AddDbContext<PersonContext>(opt => opt.UseSqlite(@"Data Source=c:\dev\tmp\persons.sql"));
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
     }
@@ -61,9 +61,12 @@ namespace EntityFrameworkMvc
                   template: "{controller=Home}/{action=Index}/{id?}");
       });
 
-      personContext.Persons.Add(new Person { Name = "Raf" });
-      personContext.Persons.Add(new Person { Name = "Kim" });
-      personContext.SaveChanges();
+      if (!personContext.Persons.Any())
+      {
+        personContext.Persons.Add(new Person { Name = "Raf" });
+        personContext.Persons.Add(new Person { Name = "Kim" });
+        personContext.SaveChanges();
+      }
     }
   }
 }
