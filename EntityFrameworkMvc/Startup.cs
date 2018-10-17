@@ -33,7 +33,7 @@ namespace EntityFrameworkMvc
         options.MinimumSameSitePolicy = SameSiteMode.None;
       });
 
-      services.AddDbContext<PersonContext>(opt => opt.UseSqlite(@"Data Source=c:\dev\tmp\persons.sql"));
+      services.AddDbContext<PersonContext>(opt => opt.UseSqlite(@"Data Source=C:\Dev\ThomasMore\CursusV2\ExampleCode\EntityFrameworkMvc\persons.db"));
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
     }
