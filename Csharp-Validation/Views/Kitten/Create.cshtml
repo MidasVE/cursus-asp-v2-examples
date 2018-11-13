@@ -1,0 +1,36 @@
+﻿@model Kitten
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Kittens!</h4>
+        <hr />
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NiceScale" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NiceScale" class="form-control" />
+                <span asp-validation-for="NiceScale" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DateOfBirth" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DateOfBirth" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <input type="submit" />
+    </div>
+</form>

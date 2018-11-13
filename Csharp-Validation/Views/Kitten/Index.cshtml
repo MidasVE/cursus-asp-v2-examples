@@ -1,0 +1,8 @@
+﻿@model KittenLitter
+
+<h1>KITTENS!</h1>
+<ul>
+@foreach(var kitten in Model.Kittens) {
+    <li><strong>@kitten.Name</strong></li>
+}
+</ul>
