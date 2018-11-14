@@ -1,8 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Csharp_Validation.Models
 {
+  public class KittenCreateViewModel
+  {
+    public List<SelectListItem> OtherKittens { get; set; }
+    public string SelectedMother {get;set;}
+    public Kitten Kitten { get; set; }
+  }
 
   public class Kitten
   {
@@ -20,9 +28,12 @@ namespace Csharp_Validation.Models
     [Display(Name = "Geboortedatum")]
     [DataType(DataType.Date)]
     [Required]
+    [DateInThePastValidator]
     public DateTime DateOfBirth { get; set; }
 
     [Display(Name = "Mannelijk")]
     public bool IsMale { get; set; }
+
+    public Kitten Mother { get; set; }
   }
 }

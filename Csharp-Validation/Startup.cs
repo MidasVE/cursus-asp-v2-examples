@@ -42,6 +42,7 @@ namespace Csharp_Validation
     {
       context.Kittens.Add(new Kitten { Name = "Loki", DateOfBirth = new DateTime(2014, 04, 02), NiceScale = 10, IsMale = true });
       context.Kittens.Add(new Kitten { Name = "Marie", DateOfBirth = new DateTime(2016, 04, 02), NiceScale = 4, IsMale = false });
+      context.Kittens.Add(new Kitten { Name = "Josefina", DateOfBirth = DateTime.Now.AddDays(-1), NiceScale = 4, IsMale = false });
       context.SaveChanges();
 
       if (env.IsDevelopment())

@@ -1,4 +1,4 @@
-﻿@model Kitten
+﻿@model KittenCreateViewModel
 
 <form asp-action="Create">
     <div class="form-horizontal">
@@ -9,34 +9,42 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         
         <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <label asp-for="Kitten.Name" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Kitten.Name" class="form-control" />
+                <span asp-validation-for="Kitten.Name" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="NiceScale" class="col-md-2 control-label"></label>
+            <label asp-for="Kitten.NiceScale" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="NiceScale" class="form-control" />
-                <span asp-validation-for="NiceScale" class="text-danger"></span>
+                <input asp-for="Kitten.NiceScale" class="form-control" />
+                <span asp-validation-for="Kitten.NiceScale" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="DateOfBirth" class="col-md-2 control-label"></label>
+            <label asp-for="Kitten.DateOfBirth" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="DateOfBirth" class="form-control" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                <input asp-for="Kitten.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Kitten.DateOfBirth" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="IsMale" class="col-md-2 control-label"></label>
+            <label asp-for="Kitten.IsMale" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="IsMale" class="form-control" />
-                <span asp-validation-for="IsMale" class="text-danger"></span>
+                <input asp-for="Kitten.IsMale" class="form-control" />
+                <span asp-validation-for="Kitten.IsMale" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SelectedMother" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="SelectedMother" asp-items="Model.OtherKittens"></select> 
+                <span asp-validation-for="SelectedMother" class="text-danger"></span>
             </div>
         </div>
 

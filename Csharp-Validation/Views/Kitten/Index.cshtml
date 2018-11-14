@@ -9,6 +9,7 @@
             @(kitten.IsMale ? "Mannetje" : "Vrouwtje") 
             - @kitten.DateOfBirth.ToShortDateString()
             - @(new string('*', kitten.NiceScale))
+            - @kitten.Mother?.Name
         </div>
     </li>
 }
