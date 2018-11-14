@@ -29,8 +29,7 @@ namespace Csharp_Validation.Controllers
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(
-        [Bind("Id,Name,NiceScale,DateOfBirth")] Kitten kitten)
+    public IActionResult Create(Kitten kitten)
     {
       if (ModelState.IsValid && KittenIsUnique(kitten))
       {
