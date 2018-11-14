@@ -21,5 +21,8 @@ namespace Csharp_Validation.Models
     [DataType(DataType.Date)]
     [Required]
     public DateTime DateOfBirth { get; set; }
+
+    [Display(Name = "Mannelijk")]
+    public bool IsMale { get; set; }
   }
 }

@@ -32,6 +32,13 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label asp-for="IsMale" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="IsMale" class="form-control" />
+                <span asp-validation-for="IsMale" class="text-danger"></span>
+            </div>
+        </div>
 
         <input type="submit" />
     </div>
