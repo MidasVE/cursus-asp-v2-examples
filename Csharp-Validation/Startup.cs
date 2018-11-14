@@ -40,9 +40,10 @@ namespace Csharp_Validation
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, KittenDbContext context)
     {
-      context.Kittens.Add(new Kitten { Name = "Loki", DateOfBirth = DateTime.Now, NiceScale = 10 });
+      context.Kittens.Add(new Kitten { Name = "Loki", DateOfBirth = new DateTime(2014, 04, 02), NiceScale = 10, IsMale = true });
+      context.Kittens.Add(new Kitten { Name = "Marie", DateOfBirth = new DateTime(2016, 04, 02), NiceScale = 4, IsMale = false });
       context.SaveChanges();
-      
+
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
