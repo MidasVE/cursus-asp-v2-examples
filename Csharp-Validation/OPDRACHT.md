@@ -9,3 +9,8 @@
 * Zorg er voor dat de katten editeerbaar zijn. 
   * Ofwel herbruik je de `create` pagina
   * Ofwel maak je een nieuwe pagina die enkel en alleen voor de edit dient.
+
+## Links
+
+* http://localhost:5000/kitten/create
+* http://localhost:5000/kitten
