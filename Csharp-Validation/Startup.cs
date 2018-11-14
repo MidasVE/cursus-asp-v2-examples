@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EntityFrameworkMvc.DataAccess;
+using Csharp_Validation.DataContext;
+using Csharp_Validation.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EntityFrameworkMvc
+namespace Csharp_Validation
 {
   public class Startup
   {
@@ -32,15 +32,17 @@ namespace EntityFrameworkMvc
         options.CheckConsentNeeded = context => true;
         options.MinimumSameSitePolicy = SameSiteMode.None;
       });
-
-      services.AddDbContext<PersonContext>(opt => opt.UseSqlite(@"Data Source=C:\Dev\ThomasMore\CursusV2\ExampleCode\EntityFrameworkMvc\persons.db"));
+      services.AddDbContext<KittenDbContext>(options => options.UseInMemoryDatabase("Kittens"));
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, PersonContext personContext)
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, KittenDbContext context)
     {
+      context.Kittens.Add(new Kitten { Name = "Loki", DateOfBirth = DateTime.Now, NiceScale = 10 });
+      context.SaveChanges();
+      
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
@@ -48,7 +50,6 @@ namespace EntityFrameworkMvc
       else
       {
         app.UseExceptionHandler("/Home/Error");
-        app.UseHsts();
       }
 
       app.UseStaticFiles();
@@ -60,13 +61,6 @@ namespace EntityFrameworkMvc
                   name: "default",
                   template: "{controller=Home}/{action=Index}/{id?}");
       });
-
-      if (!personContext.Persons.Any())
-      {
-        personContext.Persons.Add(new Person { Name = "Raf" });
-        personContext.Persons.Add(new Person { Name = "Kim" });
-        personContext.SaveChanges();
-      }
     }
   }
 }
