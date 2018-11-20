@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Csharp_Validation.Models;
 using Csharp_Validation.DataContext;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Csharp_Validation.Controllers
 {
@@ -24,20 +25,50 @@ namespace Csharp_Validation.Controllers
 
     public IActionResult Create()
     {
-      return View();
+      var vm = new KittenCreateViewModel();
+      AddOtherKittensToViewModel(vm);
+      return View(vm);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Kitten kitten)
+    public IActionResult Create(KittenCreateViewModel vm)
     {
-      if (ModelState.IsValid && KittenIsUnique(kitten))
+      var kitten = vm.Kitten;
+      var mother = GetMother(vm);
+      if (ModelState.IsValid
+        && KittenIsUnique(kitten)
+        && CheckMother(mother))
       {
+        kitten.Mother = mother;
         _context.Kittens.Add(kitten);
         _context.SaveChanges();
         return RedirectToAction("Index");
       }
-      return View(kitten);
+      AddOtherKittensToViewModel(vm);
+      return View(vm);
+    }
+
+    private Kitten GetMother(KittenCreateViewModel vm)
+    {
+      int.TryParse(vm.SelectedMother, out var motherId);
+      var mother = _context.Kittens.Find(motherId);
+      return mother;
+    }
+
+    private bool CheckMother(Kitten mother)
+    {
+      if (mother == null)
+      {
+        ModelState.AddModelError("Mother", "Onbekende moeder");
+        return false;
+      }
+      if (mother.DateOfBirth > DateTime.Now.AddYears(-1))
+      {
+        ModelState.AddModelError("Mother", "Moeder moest minstens 1 jaar oud zijn.");
+        return false;
+      }
+      return true;
     }
 
     private bool KittenIsUnique(Kitten kitten)
@@ -49,6 +80,18 @@ namespace Csharp_Validation.Controllers
         return false;
       }
       return true;
+    }
+
+    private void AddOtherKittensToViewModel(KittenCreateViewModel vm)
+    {
+      vm.OtherKittens = _context.Kittens
+        .Where(x => !x.IsMale)
+        .Select(x => new SelectListItem
+        {
+          Value = $"{x.Id}",
+          Text = x.Name
+        })
+        .ToList();
     }
   }
 }
