@@ -32,7 +32,7 @@ namespace EntityFrameworkMigrations
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddDbContext<MyContext>(x => x.UseSqlite("Data Source=kitties.db"))
+            services.AddDbContext<MyContext>(x => x.UseSqlite("Data Source=kitties.db"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
