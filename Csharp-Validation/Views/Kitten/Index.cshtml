@@ -3,6 +3,14 @@
 <h1>KITTENS!</h1>
 <ul>
 @foreach(var kitten in Model.Kittens) {
-    <li><strong>@kitten.Name</strong></li>
+    <li>
+        <div>
+            <h4>@kitten.Name</h4>
+            @(kitten.IsMale ? "Mannetje" : "Vrouwtje") 
+            - @kitten.DateOfBirth.ToShortDateString()
+            - @(new string('*', kitten.NiceScale))
+            - @kitten.Mother?.Name
+        </div>
+    </li>
 }
 </ul>
