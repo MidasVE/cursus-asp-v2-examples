@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace Logic {
     public class Refrigerator {
@@ -20,29 +19,20 @@ namespace Logic {
             // add more logic here
             return _database.GetItem (id);
         }
-    }
 
-    public interface IDatabase {
-        int AddItem (string input);
-        string GetItem (int id);
-    }
-
-    public class Database : IDatabase {
-        private Dictionary<int, string> _items;
-
-        public Database () {
-            _items = new Dictionary<int, string> ();
+        public IEnumerable<string> GetAllItems (string startsWith) {
+            // TODO 
+            throw new NotImplementedException ();
         }
 
-        public int AddItem (string input) {
-            var newId = _items.Any () ? _items.Keys.Max () + 1 : 1;
-            _items.Add (newId, input);
-            return newId;
+        public void UpdateItem (int id, string newValue) {
+            // TODO
+            throw new NotImplementedException ();
         }
 
-        public string GetItem (int id) {
-            _items.TryGetValue (id, out var item);
-            return item;
+        public void DeleteItem (int id, string newValue) {
+            // TODO
+            throw new NotImplementedException ();
         }
     }
 
